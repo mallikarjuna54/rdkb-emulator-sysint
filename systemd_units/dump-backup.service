@@ -1,0 +1,12 @@
+[Unit]
+Description=Dump Backup Service
+After=network-online.target 
+
+[Service]
+Type=forking
+ExecStart=/bin/sh -c '/lib/rdk/core_shell.sh;'
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+
