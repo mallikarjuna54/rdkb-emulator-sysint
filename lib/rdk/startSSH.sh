@@ -40,5 +40,14 @@ while [ $loop -eq 1 ]
            fi
       done
 echo --------- $interface got an ip $ipAddress starting dropbear service ---------
-dropbear -b /etc/sshbanner.txt -a -p $ipAddress:22 &
+#dropbear -b /etc/sshbanner.txt -a -p $ipAddress:22 &
+if [ -e /sbin/dropbear ] || [ -e /usr/sbin/dropbear ] ; then
+	if [ ! -e /etc/dropbear/dropbear_rsa_host_key ]; then
+		mkdir -p /etc/dropbear
+		dropbearkey -t rsa -f /etc/dropbear/dropbear_rsa_host_key
+		dropbearkey -t dss -f /etc/dropbear/dropbear_dss_host_key
+	fi
+	dropbear -a -p $ipAddress:22 &
+fi
+
 
