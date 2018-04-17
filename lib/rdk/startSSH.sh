@@ -47,7 +47,8 @@ if [ -e /sbin/dropbear ] || [ -e /usr/sbin/dropbear ] ; then
 		dropbearkey -t rsa -f /etc/dropbear/dropbear_rsa_host_key
 		dropbearkey -t dss -f /etc/dropbear/dropbear_dss_host_key
 	fi
-	dropbear -a -p $ipAddress:22 &
+	#dropbear -a -p $ipAddress:22 &
+	dropbear -B &   ###Allow blank password logins
 fi
 
 
